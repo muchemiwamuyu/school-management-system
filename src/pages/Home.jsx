@@ -93,14 +93,96 @@ function Home() {
     </div>
 
     {/* contact us section */}
-    <div className='h-screen bg-cover bg-center relative' style={{ backgroundImage: `url(${ContactKid})` }}>
+    <div className='h-screen bg-cover bg-center relative flex' style={{ backgroundImage: `url(${ContactKid})` }}>
       <div className="absolute inset-0 bg-blue-900 opacity-80"></div>
       <h1 className='text-6xl absolute m-4 text-white'>Contact us</h1>
-      <img src={muslimGirl} alt="" />
+      <div className='w-2xl h-4/5 bg-cover bg-center absolute top-28 left-5 rounded shadow-md shadow-black' style={{backgroundImage: `url(${muslimGirl})`}} >
+      </div>
+      <div className='w-1/2 h-5/6 bg-cover bg-center absolute top-24 right-5 rounded shadow-md shadow-black flex items-center justify-center space-y-6' >
+        <form className="bg-white bg-opacity-90 w-full h-full p-10 rounded-lg shadow-lg flex flex-col justify-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Get in Touch</h2>
+          <div>
+            <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
+            <input
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your Name"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+            <input
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-2" htmlFor="subject">Subject</label>
+            <input
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+            />
+          </div>
+          <div className="flex-1 flex flex-col">
+            <label className="block text-gray-700 mb-2" htmlFor="message">Message</label>
+            <textarea
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 flex-1 resize-none"
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Type your message here..."
+              required
+              style={{ minHeight: "100px" }}
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-700 text-white py-3 rounded font-semibold hover:bg-blue-800 transition mt-4"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
     </div>
+
+    {/* footer section */}
+    <footer className="bg-blue-900 text-white py-10 px-8 flex flex-col md:flex-row justify-between items-center relative z-10">
+      <div className="mb-6 md:mb-0">
+        <h2 className="text-2xl font-bold mb-2">Kingsbridge Academy</h2>
+        <p className="text-gray-300 max-w-xs">
+          Inspiring excellence, nurturing growth. Where learning starts and futures are built.
+        </p>
+      </div>
+      <div className="mb-6 md:mb-0">
+        <h3 className="font-semibold mb-2">Quick Links</h3>
+        <ul>
+          <li><a href="#" className="hover:underline text-gray-200">Home</a></li>
+          <li><a href="#" className="hover:underline text-gray-200">About</a></li>
+          <li><a href="#" className="hover:underline text-gray-200">Enrollments</a></li>
+          <li><a href="#" className="hover:underline text-gray-200">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="font-semibold mb-2">Contact Info</h3>
+        <p className="text-gray-300">123 School Lane, City, Country</p>
+        <p className="text-gray-300">Email: info@kingsbridgeacademy.com</p>
+        <p className="text-gray-300">Phone: +123 456 7890</p>
+      </div>
+      <div className="absolute bottom-2 left-0 w-full text-center text-gray-400 text-sm">
+        &copy; {new Date().getFullYear()} Kingsbridge Academy. All rights reserved.
+      </div>
+    </footer>
     </>
-    
-    
   )
 }
 
