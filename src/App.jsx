@@ -18,6 +18,8 @@ import Academics from './pages/Academics'
 import Finance from './pages/Finance'
 import Notice from './pages/Notice'
 import Settings from './pages/Settings'
+import Signup from './pages/Signup'
+import Parents from './pages/Parents'
 
 function App() {
  
@@ -38,6 +40,8 @@ function App() {
         <Route path='/finance' element={<Finance/>}/>
         <Route path='/notice' element={<Notice/>}/>
         <Route path='/settings' element={<Settings/>}/>
+        <Route path='/signup' element={<Signup/>}/>
+        <Route path='/parents' element={<Parents/>}/>
         {/* Add more routes as needed */}
       </Routes>
     </Router>
