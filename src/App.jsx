@@ -20,6 +20,9 @@ import Notice from './pages/Notice'
 import Settings from './pages/Settings'
 import Signup from './pages/Signup'
 import Parents from './pages/Parents'
+import Teachers from './pages/Teachers'
+import LoginStaff from './pages/LoginStaff'
+import Deans from './pages/Deans'
 
 function App() {
  
@@ -42,6 +45,10 @@ function App() {
         <Route path='/settings' element={<Settings/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/parents' element={<Parents/>}/>
+        <Route path='/teachers' element={<Teachers/>}/>
+        <Route path='/login' element={<LoginStaff/>}/>
+        <Route path='/dean-dashboard' element={<Deans/>}/>
+
         {/* Add more routes as needed */}
       </Routes>
     </Router>

@@ -12,11 +12,13 @@ import { FaQuoteLeft } from 'react-icons/fa'
 import { BsStars } from 'react-icons/bs'
 import { TbTargetArrow } from 'react-icons/tb'
 import { HiOutlineEye } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
 
 function Home() {
 
   const contactGradient = 'bg-gradient-to-r from-[#0c0d0d] to-[#17191c]'
+  const navigate = useNavigate()
   return (
     <>
     {/* hero section */}
@@ -34,7 +36,7 @@ function Home() {
         <h1 className='text-7xl text-white font-bold' style={{ fontFamily: 'Alice' }}>KINGSBRIDGE <br /> ACADEMY</h1>
         <p className='text-lg text-[#a9c7ee]'>where learning starts</p>
 
-        <button className='bg-[#fab916] w-full mt-15 py-3 rounded text-xl' style={{ fontFamily: 'Instrumental Serif' }}>Enroll Now</button>
+        <a href="/signup"><button className='bg-[#fab916] w-full mt-15 py-3 rounded text-xl' style={{ fontFamily: 'Instrumental Serif' }} >Enroll Now</button></a>
 
       </div>
       {/* Content can go here */}
@@ -173,6 +175,8 @@ function Home() {
           <li><a href="#" className="hover:underline text-gray-200">About</a></li>
           <li><a href="#" className="hover:underline text-gray-200">Enrollments</a></li>
           <li><a href="#" className="hover:underline text-gray-200">Contact</a></li>
+          <li><a href="/register-admin" target='blank' className="hover:underline text-gray-200">admin</a></li>
+
         </ul>
       </div>
       <div>

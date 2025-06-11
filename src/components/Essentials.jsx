@@ -1,5 +1,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
+import { Link } from 'react-router-dom';
 
 function Essentials() {
     const today = dayjs();
@@ -59,30 +60,30 @@ function Essentials() {
                 <h1 className='text-2xl text-white p-3' style={{ fontFamily: 'Instrument Serif, serif' }}>Agenda</h1>
                 <hr className='h-2 bg-white rounded'/>
                 <div className='text-white p-3 space-y-3'>
-                    <div className='h-1/2 bg-rose-500 space-y-3 p-3'>
+                    <div className='h-1/2 space-y-3 p-3 underline' style={{ fontFamily: 'Instrument Serif, serif' }}>
                         {/* timeline div */}
-                        <div className=' h-12 bg-green-400'>
-                            <li className='text-xl'>Links</li>
+                        <div className=' h-12'>
+                            <Link className='text-xl'>Academic Excellence</Link>
                         </div>
-                        <div className=' h-12 bg-red-400'>
-                            <li className='text-xl'>Prepare for staff meeting</li>
+                        <div className=' h-12'>
+                            <Link className='text-xl'>Supportive Learning</Link>
                         </div>
-                        <div className=' h-12 bg-blue-400'>
-                            <li className='text-xl'>Prepare for staff meeting</li>
+                        <div className=' h-12'>
+                            <Link className='text-xl'>Community Engagement</Link>
                         </div>
                     </div>
 
-                    <div className=' bg-amber-300'>
-                        <div className='h-1/2 bg-gray-500 space-y-3 p-3'>
+                    <div className=''>
+                        <div className='h-1/2 space-y-3 p-3 text-black underline' style={{ fontFamily: 'Instrument Serif, serif' }}>
                             {/* timeline div */}
-                            <div className=' h-12 bg-green-400'>
-                                <li className='text-xl'>Links</li>
+                            <div className=' h-12 '>
+                                <Link className='text-xl'>Discipline Framework</Link>
                             </div>
-                            <div className=' h-12 bg-red-400'>
-                                <li className='text-xl'>Prepare for staff meeting</li>
+                            <div className=' h-12'>
+                                <Link className='text-xl'>Open Communication</Link>
                             </div>
-                            <div className=' h-12 bg-blue-400'>
-                                <li className='text-xl'>Prepare for staff meeting</li>
+                            <div className=' h-12'>
+                                <Link className='text-xl'>Collaboration with Admin</Link>
                             </div>
                         </div>
                     </div>
