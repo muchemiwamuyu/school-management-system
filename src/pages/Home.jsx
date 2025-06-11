@@ -176,6 +176,8 @@ function Home() {
           <li><a href="#" className="hover:underline text-gray-200">Enrollments</a></li>
           <li><a href="#" className="hover:underline text-gray-200">Contact</a></li>
           <li><a href="/register-admin" target='blank' className="hover:underline text-gray-200">admin</a></li>
+          <li><a href="/login" target='blank' className="hover:underline text-gray-200">staff</a></li>
+
 
         </ul>
       </div>
