@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  Users, 
-  BookOpen, 
-  Calendar, 
-  MessageSquare, 
-  Bell, 
-  Settings, 
+import {
+  Users,
+  BookOpen,
+  Calendar,
+  MessageSquare,
+  Bell,
+  Settings,
   Search,
   Plus,
   TrendingUp,
@@ -29,56 +29,61 @@ import {
   Filter,
   Download
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import GradientActionCards from '../components/Departments';
 
 export default function Deans() {
   const [activeTab, setActiveTab] = useState('overview');
   const [notifications, setNotifications] = useState(7);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [classes, setClasses] = useState([]);
+  const [departments, setDepartments] = useState([]);
+
 
   const teacherData = [
-    { 
-      id: 1, 
-      name: 'Ms. Sarah Johnson', 
-      subject: 'Mathematics', 
-      classes: 5, 
-      students: 142, 
-      performance: 89, 
+    {
+      id: 1,
+      name: 'Ms. Sarah Johnson',
+      subject: 'Mathematics',
+      classes: 5,
+      students: 142,
+      performance: 89,
       status: 'active',
       attendance: 98,
       lastActive: '2 hours ago',
       email: 'sarah.johnson@school.edu'
     },
-    { 
-      id: 2, 
-      name: 'Dr. Michael Chen', 
-      subject: 'Physics', 
-      classes: 4, 
-      students: 96, 
-      performance: 92, 
+    {
+      id: 2,
+      name: 'Dr. Michael Chen',
+      subject: 'Physics',
+      classes: 4,
+      students: 96,
+      performance: 92,
       status: 'active',
       attendance: 100,
       lastActive: '1 hour ago',
       email: 'michael.chen@school.edu'
     },
-    { 
-      id: 3, 
-      name: 'Ms. Emily Rodriguez', 
-      subject: 'Chemistry', 
-      classes: 6, 
-      students: 158, 
-      performance: 85, 
+    {
+      id: 3,
+      name: 'Ms. Emily Rodriguez',
+      subject: 'Chemistry',
+      classes: 6,
+      students: 158,
+      performance: 85,
       status: 'warning',
       attendance: 94,
       lastActive: '30 min ago',
       email: 'emily.rodriguez@school.edu'
     },
-    { 
-      id: 4, 
-      name: 'Mr. David Wilson', 
-      subject: 'Biology', 
-      classes: 3, 
-      students: 78, 
-      performance: 87, 
+    {
+      id: 4,
+      name: 'Mr. David Wilson',
+      subject: 'Biology',
+      classes: 3,
+      students: 78,
+      performance: 87,
       status: 'active',
       attendance: 96,
       lastActive: '4 hours ago',
@@ -101,7 +106,7 @@ export default function Deans() {
   ];
 
   const getStatusColor = (status) => {
-    switch(status) {
+    switch (status) {
       case 'active': return 'bg-green-100 text-green-800';
       case 'warning': return 'bg-yellow-100 text-yellow-800';
       case 'inactive': return 'bg-red-100 text-red-800';
@@ -110,7 +115,7 @@ export default function Deans() {
   };
 
   const getAlertColor = (type) => {
-    switch(type) {
+    switch (type) {
       case 'urgent': return 'bg-red-50 border-red-200 text-red-800';
       case 'warning': return 'bg-yellow-50 border-yellow-200 text-yellow-800';
       case 'success': return 'bg-green-50 border-green-200 text-green-800';
@@ -118,6 +123,11 @@ export default function Deans() {
     }
   };
 
+  const departmentsBg = {
+    background: 'linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)'
+  };
+
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
@@ -135,17 +145,17 @@ export default function Deans() {
                 <p className="text-sm text-gray-600">Administrative Control Center</p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input 
-                  type="text" 
-                  placeholder="Search teachers, departments..." 
+                <input
+                  type="text"
+                  placeholder="Search teachers, departments..."
                   className="pl-10 pr-4 py-2 w-full sm:w-64 lg:w-80 bg-white/70 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent backdrop-blur-sm"
                 />
               </div>
-              
+
               <button className="relative p-3 bg-white/70 backdrop-blur-sm rounded-xl hover:bg-white/90 transition-all duration-200 border border-white/30 shadow-md">
                 <Bell className="w-5 h-5 text-gray-600" />
                 {notifications > 0 && (
@@ -154,11 +164,11 @@ export default function Deans() {
                   </span>
                 )}
               </button>
-              
+
               <button className="p-3 bg-white/70 backdrop-blur-sm rounded-xl hover:bg-white/90 transition-all duration-200 border border-white/30 shadow-md">
                 <Settings className="w-5 h-5 text-gray-600" />
               </button>
-              
+
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-lg">
                 <span className="text-white font-bold">DR</span>
               </div>
@@ -172,7 +182,7 @@ export default function Deans() {
         <aside className="w-full lg:w-72 bg-white/70 backdrop-blur-lg border-r border-white/20 lg:min-h-screen p-4 lg:p-6 shadow-xl">
           <nav className="space-y-2">
             <div className="lg:hidden mb-4">
-              <button 
+              <button
                 className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl"
                 onClick={() => setActiveTab(activeTab)}
               >
@@ -181,38 +191,36 @@ export default function Deans() {
               </button>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-2">
-            {[
-              { id: 'overview', icon: BarChart3, label: 'Overview', badge: null },
-              { id: 'teachers', icon: Users, label: 'Teachers', badge: teacherData.length },
-              { id: 'departments', icon: Building, label: 'Departments', badge: departmentStats.length },
-              { id: 'performance', icon: Target, label: 'Performance Analytics', badge: null },
-              { id: 'schedule', icon: Calendar, label: 'Schedule Oversight', badge: null },
-              { id: 'reports', icon: FileText, label: 'Reports & Analytics', badge: null },
-              { id: 'messages', icon: MessageSquare, label: 'Communications', badge: 12 },
-              { id: 'resources', icon: GraduationCap, label: 'Resources', badge: null },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center justify-between px-3 lg:px-4 py-2 lg:py-3 rounded-xl transition-all duration-200 text-sm lg:text-base ${
-                  activeTab === item.id
+              {[
+                { id: 'overview', icon: BarChart3, label: 'Overview', badge: null },
+                { id: 'teachers', icon: Users, label: 'Teachers', badge: teacherData.length },
+                { id: 'departments', icon: Building, label: 'Departments', badge: departmentStats.length },
+                { id: 'performance', icon: Target, label: 'Performance Analytics', badge: null },
+                { id: 'schedule', icon: Calendar, label: 'Schedule Oversight', badge: null },
+                { id: 'reports', icon: FileText, label: 'Reports & Analytics', badge: null },
+                { id: 'messages', icon: MessageSquare, label: 'Communications', badge: 12 },
+                { id: 'resources', icon: GraduationCap, label: 'Resources', badge: null },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center justify-between px-3 lg:px-4 py-2 lg:py-3 rounded-xl transition-all duration-200 text-sm lg:text-base ${activeTab === item.id
                     ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg transform scale-105'
                     : 'text-gray-700 hover:bg-white/80 hover:text-gray-900 hover:shadow-md'
-                }`}
-              >
-                <div className="flex items-center space-x-2 lg:space-x-3">
-                  <item.icon className="w-4 h-4 lg:w-5 lg:h-5" />
-                  <span className="font-medium hidden sm:block lg:block">{item.label}</span>
-                </div>
-                {item.badge && (
-                  <span className={`px-2 py-1 rounded-full text-xs font-bold hidden lg:block ${
-                    activeTab === item.id ? 'bg-white/20' : 'bg-indigo-100 text-indigo-600'
-                  }`}>
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            ))}
+                    }`}
+                >
+                  <div className="flex items-center space-x-2 lg:space-x-3">
+                    <item.icon className="w-4 h-4 lg:w-5 lg:h-5" />
+                    <span className="font-medium hidden sm:block lg:block">{item.label}</span>
+                  </div>
+                  {item.badge && (
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold hidden lg:block ${activeTab === item.id ? 'bg-white/20' : 'bg-indigo-100 text-indigo-600'
+                      }`}>
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              ))}
             </div>
           </nav>
         </aside>
@@ -296,6 +304,8 @@ export default function Deans() {
             </div>
           )}
 
+
+
           {activeTab === 'teachers' && (
             <div className="space-y-6">
               {/* Teacher Management Header */}
@@ -314,7 +324,7 @@ export default function Deans() {
                     <Download className="w-4 h-4" />
                     <span className="hidden sm:block">Export</span>
                   </button>
-                  <button className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm lg:text-base">
+                  <button onClick={() => navigate('/staff-admin')} className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm lg:text-base">
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:block">Add Teacher</span>
                   </button>
@@ -330,8 +340,8 @@ export default function Deans() {
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Teacher</th>
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Subject</th>
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base hidden sm:table-cell">Classes</th>
-                        <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base hidden md:table-cell">Students</th>
-                        <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Performance</th>
+                        <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base hidden md:table-cell">Email</th>
+                        <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Phone</th>
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base hidden lg:table-cell">Attendance</th>
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Status</th>
                         <th className="text-left p-3 lg:p-4 font-semibold text-gray-700 text-sm lg:text-base">Actions</th>
@@ -358,7 +368,7 @@ export default function Deans() {
                             <div className="flex items-center space-x-2">
                               <span className="font-semibold text-gray-800 text-sm lg:text-base">{teacher.performance}%</span>
                               <div className="w-12 lg:w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div 
+                                <div
                                   className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full transition-all duration-300"
                                   style={{ width: `${teacher.performance}%` }}
                                 ></div>
@@ -397,7 +407,189 @@ export default function Deans() {
             </div>
           )}
 
-          {activeTab !== 'overview' && activeTab !== 'teachers' && (
+
+          {activeTab === 'departments' && (
+            <div className="space-y-6">
+              {/* Teacher Management Header */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-xl lg:text-2xl font-bold text-gray-800">Teacher & Departments Management</h2>
+                  <p className="text-gray-600 text-sm lg:text-base">Monitor and manage teaching staff, classes and academic departments</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 lg:gap-3">
+                  <button className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-white/70 border border-white/30 rounded-xl hover:bg-white/90 transition-all duration-200 text-sm lg:text-base">
+                    <Filter className="w-4 h-4" />
+                    <span className="hidden sm:block">Filter</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                  <button className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-white/70 border border-white/30 rounded-xl hover:bg-white/90 transition-all duration-200 text-sm lg:text-base">
+                    <Download className="w-4 h-4" />
+                    <span className="hidden sm:block">Export</span>
+                  </button>
+                  <button onClick={() => navigate('/staff-admin')} className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm lg:text-base">
+                    <Plus className="w-4 h-4" />
+                    <span className="hidden sm:block">Add Teacher</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Teachers Table */}
+              <div className="bg-white/80 backdrop-blur-lg rounded-2xl border border-white/20 shadow-xl h-screen p-4">
+                <h2 className='p-2 font-bold underline'>Class & Departments</h2>
+                <GradientActionCards setClasses={setClasses} setDepartments={setDepartments} />
+
+                {classes.length > 0 && (
+                  <div className="mt-6 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                    <h3 className='p-3 font-bold text-gray-500'>Recently added Classes</h3>
+                    <button
+                      onClick={() => handleMoreOptions(cls.id)}
+                      className="text-gray-600 hover:text-gray-800 transition-colors p-1.5 hover:bg-gray-50 rounded-lg ml-[1500px] mt-[-70px]"
+                      title="More Options"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                      </svg>
+                    </button>
+                    <table className="min-w-full">
+                      <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                        <tr>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Class Name
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Capacity
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Teacher
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Subjects
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Grade
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-100">
+                        {classes.map((cls, idx) => (
+                          <tr
+                            key={idx}
+                            className="hover:bg-gray-50 transition-colors duration-200 group"
+                          >
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                              {cls.class_name}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {cls.class_capacity}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                              {cls.class_teacher}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                {cls.total_subjects}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-medium">
+                              {cls.grade_level}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                              <div className="flex items-center space-x-2">
+                                <button
+                                  onClick={() => handleEdit(cls.id)}
+                                  className="text-blue-600 hover:text-blue-800 transition-colors p-1.5 hover:bg-blue-50 rounded-lg"
+                                  title="Edit Class"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(cls.id)}
+                                  className="text-red-600 hover:text-red-800 transition-colors p-1.5 hover:bg-red-50 rounded-lg"
+                                  title="Delete Class"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                  </svg>
+                                </button>
+                                <button
+                                  onClick={() => handleView(cls.id)}
+                                  className="text-green-600 hover:text-green-800 transition-colors p-1.5 hover:bg-green-50 rounded-lg"
+                                  title="View Class Details"
+                                >
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                  </svg>
+                                </button>
+
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {departments.length > 0 && (
+                  <div className="mt-6 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                    <h3 className='p-3 font-bold text-gray-500'>Recently added Classes</h3>
+                    <table className="min-w-full">
+                      <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                        <tr>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Department Name
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Department Role
+                          </th>
+                          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                            Dean
+                          </th>
+
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-100">
+                        {departments.map((cls, idx) => (
+                          <tr
+                            key={idx}
+                            className="hover:bg-gray-50 transition-colors duration-200 group"
+                          >
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                              {cls.department_name}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {cls.department_role}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                              {cls.dean}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+
+
+
+
+
+
+          {activeTab !== 'overview' && activeTab !== 'departments' && activeTab !== 'teachers' && (
             <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-xl text-center">
               <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <Building className="w-10 h-10 text-white" />

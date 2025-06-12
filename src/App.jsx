@@ -12,7 +12,7 @@ import StaffAdmin from './pages/StaffAdmin'
 import ProtectedRoutes from './api/ProtectedRoutes'
 import MainStaff from './pages/MainStaff'
 import Staff from './pages/Staff'
-import Attendance from './pages/Attendance'
+import Attendance from './pages/StaffAttendanceSystem'
 import Students from './pages/Students'
 import Academics from './pages/Academics'
 import Finance from './pages/Finance'
@@ -23,12 +23,17 @@ import Parents from './pages/Parents'
 import Teachers from './pages/Teachers'
 import LoginStaff from './pages/LoginStaff'
 import Deans from './pages/Deans'
+import { ToastContainer } from 'react-toastify'
+import StaffAttendanceSystem from './pages/StaffAttendanceSystem'
+import Assignments from './pages/Assignments'
+import CameraTest from './pages/CameraTest'
 
 function App() {
  
 
   return (
     <>
+    <ToastContainer/>
     <Router>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -37,7 +42,7 @@ function App() {
         <Route path='/staff-admin' element={<StaffAdmin/> }/>
         <Route path='/main-staff' element={<MainStaff/>}/>
         <Route path='/staff' element={<Staff/>} />
-        <Route path='/attendance' element={<Attendance/>}/>
+        <Route path='/attendance' element={<StaffAttendanceSystem/>}/>
         <Route path='/students' element={<Students/>}/>
         <Route path='/academics' element={<Academics/>}/>
         <Route path='/finance' element={<Finance/>}/>
@@ -48,6 +53,8 @@ function App() {
         <Route path='/teachers' element={<Teachers/>}/>
         <Route path='/login' element={<LoginStaff/>}/>
         <Route path='/dean-dashboard' element={<Deans/>}/>
+        <Route path='/assignments' element={<Assignments/>}/>
+        <Route path='/camera' element={<CameraTest/>}/>
 
         {/* Add more routes as needed */}
       </Routes>

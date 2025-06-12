@@ -23,3 +23,24 @@ AxiosInstance.interceptors.request.use(
   }
 );
 
+export const AxiosInstance2 = axios.create({
+  baseURL: import.meta.env.VITE_CLASS_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
+
+export const AxiosInstance3 = axios.create({
+  baseURL: import.meta.env.VITE_BIOMETRICS_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
+
+
+export const AxiosInstance4 = axios.create({
+  baseURL: import.meta.env.VITE_STUDENT_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
