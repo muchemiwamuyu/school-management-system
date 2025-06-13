@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Eye, EyeOff, User, Mail, Lock, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
-import { AxiosInstance } from '../api/Axios';
+import { AxiosInstance1 } from '../api/Axios';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterAdmin() {
@@ -39,7 +39,7 @@ function RegisterAdmin() {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     // Await the API call
-    const response = await AxiosInstance.post('register/', formData);
+    const response = await AxiosInstance1.post('register/', formData);
     if (response.status !== 201) {
       throw new Error('Registration failed');
     }
@@ -66,7 +66,7 @@ function RegisterAdmin() {
 
                 await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
                 
-                const response = await AxiosInstance.post('api/token/', LoginData);
+                const response = await AxiosInstance1.post('api/token/', LoginData);
                 if (response.status !== 200) {
                     throw new Error('Login failed');
                 }

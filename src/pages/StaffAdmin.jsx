@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { 
-  User, Mail, Phone, Calendar, MapPin, Briefcase, 
-  Building, CreditCard, CheckCircle, AlertCircle, 
+import {
+  User, Mail, Phone, Calendar, MapPin, Briefcase,
+  Building, CreditCard, CheckCircle, AlertCircle,
   Users, Plus, Eye, EyeOff, Loader2, Star, ArrowRight,
   ChevronDown, Search, X, Save
 } from 'lucide-react';
+import { AxiosInstance1 } from '../api/Axios';
 
 // Enhanced School Brand Component
 const SchoolBrand = () => (
@@ -14,7 +15,7 @@ const SchoolBrand = () => (
     </div>
     <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
       <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        EduAdmin Pro
+        KingsBridge Academy
       </span>
     </div>
   </div>
@@ -30,7 +31,7 @@ const mockApi = {
       throw new Error('Registration failed - please try again');
     }
   },
-  
+
   checkEmailAvailability: async (email) => {
     await new Promise(resolve => setTimeout(resolve, 800));
     return Math.random() > 0.3; // 70% chance email is available
@@ -39,14 +40,14 @@ const mockApi = {
 
 // Predefined options for faster input
 const departmentOptions = [
-  'Administration', 'Academic Affairs', 'Student Services', 'Finance', 
-  'Human Resources', 'IT Services', 'Library', 'Maintenance', 
+  'Administration', 'Academic Affairs', 'Student Services', 'Finance',
+  'Human Resources', 'IT Services', 'Library', 'Maintenance',
   'Security', 'Cafeteria', 'Sports', 'Arts'
 ];
 
 const positionOptions = [
-  'Principal', 'Vice Principal', 'Department Head', 'Senior Teacher', 
-  'Teacher', 'Assistant Teacher', 'Librarian', 'Lab Assistant', 
+  'Principal', 'Vice Principal', 'Department Head', 'Senior Teacher',
+  'Teacher', 'Assistant Teacher', 'Librarian', 'Lab Assistant',
   'Administrative Assistant', 'Accountant', 'IT Specialist', 'Counselor',
   'Security Guard', 'Maintenance Staff', 'Cafeteria Staff'
 ];
@@ -56,20 +57,6 @@ const SearchableDropdown = ({ label, name, value, onChange, options, placeholder
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const dropdownRef = useRef(null);
-  
-  const [formData, setFormData] = useState({
-
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone_number: "",
-  id_number: "",
-  date_of_birth: "",
-  date_of_joining: "",
-  position: "",
-  department: ""
-});
-
 
   const filteredOptions = options.filter(option =>
     option.toLowerCase().includes(searchTerm.toLowerCase())
@@ -102,7 +89,7 @@ const SearchableDropdown = ({ label, name, value, onChange, options, placeholder
           </span>
           <ChevronDown className={`w-5 h-5 text-gray-400 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </div>
-        
+
         {isOpen && (
           <div className="absolute z-50 w-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 max-h-60 overflow-hidden">
             <div className="p-3 border-b border-gray-100">
@@ -145,12 +132,12 @@ const SearchableDropdown = ({ label, name, value, onChange, options, placeholder
 };
 
 // Enhanced Input Field with auto-complete and validation
-const EnhancedInputField = ({ 
-  label, 
-  name, 
-  type = 'text', 
-  placeholder, 
-  icon: Icon, 
+const EnhancedInputField = ({
+  label,
+  name,
+  type = 'text',
+  placeholder,
+  icon: Icon,
   required = true,
   value,
   onChange,
@@ -163,9 +150,12 @@ const EnhancedInputField = ({
   const [isValidating, setIsValidating] = useState(false);
   const inputRef = useRef(null);
 
-  const filteredSuggestions = suggestions.filter(suggestion =>
-    suggestion.toLowerCase().includes(value.toLowerCase()) && suggestion !== value
-  );
+  const filteredSuggestions = (suggestions || []).filter(suggestion => {
+  const sug = (suggestion || '').toLowerCase();
+  const val = (value || '').toLowerCase();
+  return sug.includes(val) && sug !== val;
+});
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Tab' && filteredSuggestions.length > 0) {
@@ -199,11 +189,10 @@ const EnhancedInputField = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           required={required}
-          className={`w-full px-4 py-3 border-2 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 group-hover:border-blue-300 ${
-            formErrors[name] ? 'border-red-500 bg-red-50/50' : 'border-gray-200'
-          }`}
+          className={`w-full px-4 py-3 border-2 rounded-xl bg-white/50 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 group-hover:border-blue-300 ${formErrors[name] ? 'border-red-500 bg-red-50/50' : 'border-gray-200'
+            }`}
         />
-        
+
         {/* Auto-complete suggestions */}
         {showSuggestions && filteredSuggestions.length > 0 && (
           <div className="absolute z-40 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 max-h-32 overflow-y-auto">
@@ -221,14 +210,14 @@ const EnhancedInputField = ({
             ))}
           </div>
         )}
-        
+
         {/* Validation indicator */}
         {isValidating && (
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
           </div>
         )}
-        
+
         {formErrors[name] && (
           <div className="absolute -bottom-6 left-0 flex items-center text-red-500 text-xs">
             <AlertCircle className="w-3 h-3 mr-1" />
@@ -242,13 +231,13 @@ const EnhancedInputField = ({
 
 function StaffAdmin() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
-    phoneNumber: '',
-    idNumber: '',
-    dateOfBirth: '',
-    dateOfJoining: '',
+    phone_number: '',
+    id_number: '',
+    date_of_birth: '',
+    date_of_joining: '',
     position: '',
     department: ''
   });
@@ -271,10 +260,10 @@ function StaffAdmin() {
       if (Object.values(formData).some(value => value.trim() !== '')) {
         setUiState(prev => ({ ...prev, isAutoSaving: true }));
         setTimeout(() => {
-          setUiState(prev => ({ 
-            ...prev, 
-            isAutoSaving: false, 
-            lastSaved: new Date().toLocaleTimeString() 
+          setUiState(prev => ({
+            ...prev,
+            isAutoSaving: false,
+            lastSaved: new Date().toLocaleTimeString()
           }));
         }, 1000);
       }
@@ -294,7 +283,7 @@ function StaffAdmin() {
           setEmailAvailable(null);
         }
       };
-      
+
       const timer = setTimeout(checkEmail, 1000);
       return () => clearTimeout(timer);
     }
@@ -303,7 +292,7 @@ function StaffAdmin() {
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear field-specific errors
     if (formErrors[name]) {
       setFormErrors(prev => ({ ...prev, [name]: '' }));
@@ -319,13 +308,13 @@ function StaffAdmin() {
   const validateForm = () => {
     const errors = {};
     const requiredFields = {
-      firstName: 'First name is required',
-      lastName: 'Last name is required',
+      first_name: 'First name is required',
+      last_name: 'Last name is required',
       email: 'Email is required',
-      phoneNumber: 'Phone number is required',
-      idNumber: 'ID number is required',
-      dateOfBirth: 'Date of birth is required',
-      dateOfJoining: 'Date of joining is required',
+      phone_number: 'Phone number is required',
+      idnumber: 'ID number is required',
+      date_of_birth: 'Date of birth is required',
+      date_of_joining: 'Date of joining is required',
       position: 'Position is required',
       department: 'Department is required'
     };
@@ -359,27 +348,37 @@ function StaffAdmin() {
     }
 
     setUiState(prev => ({ ...prev, isLoading: true, responseMessage: '' }));
-    
+
+
     try {
-      const response = await mockApi.registerStaff(formData);
-      
-      setUiState(prev => ({
-        ...prev,
-        responseMessage: response.data.message,
-        isSuccess: true,
-        isLoading: false
-      }));
-      
+      const response = await AxiosInstance1.post('register_school/', formData);
+
+      if (response.status === 201) {
+        setUiState(prev => ({
+          ...prev,
+          responseMessage: response.data.message || 'Staff member registered successfully!',
+          isSuccess: true,
+          isLoading: false
+        }));
+      } else if (response.status === 400) {
+        setUiState(prev => ({
+          ...prev,
+          responseMessage: response.data.message || 'Validation error - please check your input',
+          isSuccess: false,
+          isLoading: false
+        }));
+      }
+
       // Reset form after successful submission
       setTimeout(() => {
         setFormData({
-          firstName: '',
-          lastName: '',
+          first_name: '',
+          last_name: '',
           email: '',
-          phoneNumber: '',
-          idNumber: '',
-          dateOfBirth: '',
-          dateOfJoining: '',
+          phone_number: '',
+          id_number: '',
+          date_of_birth: '',
+          date_of_joining: '',
           position: '',
           department: ''
         });
@@ -392,7 +391,7 @@ function StaffAdmin() {
         setFormErrors({});
         setEmailAvailable(null);
       }, 3000);
-      
+
     } catch (error) {
       setUiState(prev => ({
         ...prev,
@@ -425,7 +424,7 @@ function StaffAdmin() {
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-6">
         <div className="w-full max-w-5xl">
-          
+
           {/* Enhanced Header Card */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 shadow-2xl">
             <div className="flex items-center justify-between flex-wrap">
@@ -436,7 +435,7 @@ function StaffAdmin() {
                 </h1>
                 <p className="text-blue-100 text-lg">Quick and intelligent staff onboarding</p>
               </div>
-              
+
               <div className="text-right">
                 <div className="flex items-center space-x-4 mb-2">
                   {uiState.isAutoSaving && (
@@ -451,10 +450,10 @@ function StaffAdmin() {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="text-white/80 text-sm mb-1">Progress</div>
                 <div className="w-32 h-3 bg-white/20 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-white to-blue-200 transition-all duration-700 ease-out"
                     style={{ width: `${getFormProgress()}%` }}
                   ></div>
@@ -468,7 +467,7 @@ function StaffAdmin() {
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
             <div className="p-8">
               <div className="space-y-8">
-                
+
                 {/* Personal Information Section */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between mb-6">
@@ -482,7 +481,7 @@ function StaffAdmin() {
                       Press Tab for auto-complete
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <EnhancedInputField
                       label="First Name"
@@ -506,7 +505,7 @@ function StaffAdmin() {
                       formErrors={formErrors}
                       suggestions={nameSuggestions}
                     />
-                    
+
                     <div className="relative">
                       <EnhancedInputField
                         label="Email Address"
@@ -526,7 +525,7 @@ function StaffAdmin() {
                         </div>
                       )}
                     </div>
-                    
+
                     <EnhancedInputField
                       label="Phone Number"
                       name="phoneNumber"
@@ -570,7 +569,7 @@ function StaffAdmin() {
                     </div>
                     <h2 className="text-2xl font-semibold text-gray-800">Professional Details</h2>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <EnhancedInputField
                       label="Date of Joining"
@@ -583,7 +582,7 @@ function StaffAdmin() {
                       formErrors={formErrors}
                       autoComplete={false}
                     />
-                    
+
                     <SearchableDropdown
                       label="Position"
                       name="position"
@@ -593,7 +592,7 @@ function StaffAdmin() {
                       placeholder="Select or search position"
                       icon={Star}
                     />
-                    
+
                     <div className="md:col-span-2">
                       <SearchableDropdown
                         label="Department"
@@ -610,11 +609,10 @@ function StaffAdmin() {
 
                 {/* Response Message */}
                 {uiState.responseMessage && (
-                  <div className={`flex items-center justify-center p-4 rounded-xl border-2 ${
-                    uiState.isSuccess 
-                      ? 'bg-green-50 text-green-800 border-green-200' 
-                      : 'bg-red-50 text-red-800 border-red-200'
-                  } transition-all duration-500 animate-pulse`}>
+                  <div className={`flex items-center justify-center p-4 rounded-xl border-2 ${uiState.isSuccess
+                    ? 'bg-green-50 text-green-800 border-green-200'
+                    : 'bg-red-50 text-red-800 border-red-200'
+                    } transition-all duration-500 animate-pulse`}>
                     {uiState.isSuccess ? (
                       <CheckCircle className="w-5 h-5 mr-2" />
                     ) : (

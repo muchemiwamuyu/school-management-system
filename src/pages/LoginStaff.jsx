@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AxiosInstance } from '../api/Axios';
+import { AxiosInstance1 } from '../api/Axios';
 import SchoolLogo from '../assets/logo.svg'
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ function LoginStaff() {
         e.preventDefault();
 
         try {
-            const loginStaff = await AxiosInstance.post('loginstaff/', formData)
+            const loginStaff = await AxiosInstance1.post('loginstaff/', formData)
             setResponseMsg(loginStaff.data.message || "Registration successfull")
             setIsSuccess(true)
 

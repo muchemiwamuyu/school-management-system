@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import React from 'react'
 import { FiMenu, FiX, FiArrowRight, FiCheck, FiBook, FiAward, FiUsers, FiSmile } from 'react-icons/fi'
+import Logo from '../assets/logo.svg'
+
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -12,10 +14,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <div className="flex items-center">
-              <div className="flex-shrink-0 flex items-center">
-                <span className="text-blue-600 font-bold text-2xl flex items-center">
-                  <FiBook className="mr-2" />
-                  Bright Minds Academy
+              <div className="flex-shrink-1 flex items-center md:ml-[-100px]">
+                <span className="text-blue-600 font-bold text-2xl flex items-center" style={{ fontFamily: 'Instrument Serif, serif' }}>
+                  <img src={Logo} alt="" className='w-28'/>
+                  Kingsbridge Academy
                 </span>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-4">
@@ -39,6 +41,11 @@ export default function Home() {
             <div className="hidden sm:ml-6 sm:flex sm:items-center">
               <button className="bg-yellow-400 hover:bg-yellow-500 text-blue-800 px-4 py-2 rounded-lg text-sm font-bold shadow-md transform hover:scale-105 transition">
                 Contact Us
+              </button>
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:items-center">
+              <button className="bg-yellow-400 hover:bg-yellow-500 text-blue-800 px-4 py-2 rounded-lg text-sm font-bold shadow-md transform hover:scale-105 transition">
+                Login
               </button>
             </div>
             <div className="-mr-2 flex items-center sm:hidden">
@@ -82,11 +89,11 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <div className="sm:text-center lg:text-left">
+      <div className="relative bg-white overflow-hidden m-6">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+            <main className="mt-10 mx-auto rounded max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+              <div className="sm:text-center lg:text-left p-3 md:ml-[-100px]">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                   <span className="block">Where Young Minds</span>
                   <span className="block text-blue-600">Grow & Shine</span>
@@ -110,8 +117,8 @@ export default function Home() {
             </main>
           </div>
         </div>
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" alt="Happy children in classroom" />
+        <div className="lg:absolute lg:inset-y-0 lg:right-3 lg:w-1/2 p-3">
+          <img className="h-56 w-full object-cover sm:h-72 md:h-96 rounded lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Nob29sJTIwa2lkc3xlbnwwfHwwfHx8MA%3D%3D" alt="Happy children in classroom" />
         </div>
       </div>
 

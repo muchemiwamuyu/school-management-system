@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AxiosInstance } from '../api/Axios';
+import { AxiosInstance1 } from '../api/Axios';
 import SchoolLogo from '../assets/logo.svg'
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ function MainStaff() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await AxiosInstance.post('registerstaff/', {
+      const response = await AxiosInstance1.post('registerstaff/', {
         username: formData.username,
         email: formData.email,
         password: formData.password
