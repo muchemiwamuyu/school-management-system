@@ -254,6 +254,8 @@ export default function Home() {
                 <li><a href="#" className="text-base text-blue-100 hover:text-white">Newsletters</a></li>
                 <li><a href="#" className="text-base text-blue-100 hover:text-white">PTA</a></li>
                 <li><a href="#" className="text-base text-blue-100 hover:text-white">Uniform</a></li>
+                <li><a href="/login" className="text-base text-blue-100 hover:text-white">Staff</a></li>
+
               </ul>
             </div>
             <div>
@@ -264,6 +266,7 @@ export default function Home() {
                 <li className="text-base text-blue-100">AB1 2CD</li>
                 <li className="text-base text-blue-100 mt-4">Tel: 01234 567890</li>
                 <li className="text-base text-blue-100">Email: info@brightminds.ac.uk</li>
+                
               </ul>
             </div>
           </div>
