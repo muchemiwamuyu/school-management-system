@@ -27,6 +27,7 @@ import { ToastContainer } from 'react-toastify'
 import StaffAttendanceSystem from './pages/StaffAttendanceSystem'
 import Assignments from './pages/Assignments'
 import CameraTest from './pages/CameraTest'
+import StudentDetails from './pages/StudentDetails'
 
 function App() {
  
@@ -40,7 +41,7 @@ function App() {
         <Route path="/register-admin" element={<RegisterAdmin/>} />
         <Route path="/admin-dashboard" element={ <ProtectedRoutes> <AdminDashboard/> </ProtectedRoutes> } />
         <Route path='/staff-admin' element={<StaffAdmin/> }/>
-        <Route path='/main-staff' element={<MainStaff/>}/>
+        <Route path='/register' element={<MainStaff/>}/>
         <Route path='/staff' element={<Staff/>} />
         <Route path='/attendance' element={<StaffAttendanceSystem/>}/>
         <Route path='/students' element={<Students/>}/>
@@ -55,7 +56,7 @@ function App() {
         <Route path='/dean-dashboard' element={<Deans/>}/>
         <Route path='/assignments' element={<Assignments/>}/>
         <Route path='/camera' element={<CameraTest/>}/>
-
+        <Route path="/students/:id" element={<StudentDetails />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>

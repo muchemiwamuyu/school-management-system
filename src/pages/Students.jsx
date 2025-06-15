@@ -60,6 +60,7 @@ export default function Students() {
     setIsSubmitting(true); // ⏳ Start loading
 
     const response = await AxiosInstance4.post("register_student/", formData);
+    console.log(response.data);
 
     if (response.status === 201) {
 
@@ -67,7 +68,11 @@ export default function Students() {
 
       toast.success('Student Registered Successfully!');
 
+      // localStorage.setItem('student', JSON.stringify(response.data));
+
       // Optionally reset form or state here
+      // setFormData({})
+      
     } else {
       toast.error('Something went wrong. Try again.');
     }
@@ -226,7 +231,7 @@ export default function Students() {
                     <option value="">Select Class</option>
                     <option value="Grade 1A">Grade 1A</option>
                     <option value="Grade 1B">Grade 1B</option>
-                    <option value="Grade 2A">Grade 2A</option>
+                    <option value="Grade 5W">Grade 5W</option>
                     <option value="Grade 2B">Grade 2B</option>
                     <option value="Grade 3A">Grade 3A</option>
                     <option value="Grade 3B">Grade 3B</option>

@@ -164,7 +164,7 @@ export default function Deans() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-700 bg-clip-text text-transparent">
-                  Dean Portal
+                  Admin Portal
                 </h1>
                 <p className="text-sm text-gray-600">Administrative Control Center</p>
               </div>
@@ -194,7 +194,7 @@ export default function Deans() {
               </button>
 
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-lg">
-                <span className="text-white font-bold">DR</span>
+                <span className="text-white font-bold">ADM</span>
               </div>
             </div>
           </div>
@@ -514,10 +514,10 @@ export default function Deans() {
                     <Download className="w-4 h-4" />
                     <span className="hidden sm:block">Export</span>
                   </button>
-                  <button onClick={() => navigate('/staff-admin')} className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm lg:text-base">
+                  {/* <button onClick={() => navigate('/staff-admin')} className="flex items-center space-x-2 px-3 lg:px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-200 text-sm lg:text-base">
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:block">Add Teacher</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
 

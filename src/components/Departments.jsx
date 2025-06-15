@@ -215,15 +215,15 @@ export default function GradientActionCards({ setClasses, setDepartments }) {
           }}
         >
           {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-opacity-10 group-hover:bg-opacity-5 transition-all duration-300"></div>
+          <div className="absolute inset-0 bg-gray-800 bg-opacity-10 group-hover:bg-opacity-5 transition-all duration-300"></div>
 
           {/* Content */}
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-gray-600 mb-2 drop-shadow-lg">
+              <h2 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
                 Academic Management
               </h2>
-              <p className="text-black/80 text-sm mb-8 drop-shadow">
+              <p className="text-white/80 text-sm mb-8 drop-shadow">
                 Manage classes and departments efficiently
               </p>
             </div>
@@ -232,23 +232,23 @@ export default function GradientActionCards({ setClasses, setDepartments }) {
               {/* Add Class Button */}
               <button
                 onClick={() => handleAction('Add Class')}
-                className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-gray-500 font-semibold flex items-center gap-3 hover:bg-white/30 transition-all duration-200 hover:transform hover:translateY-1 shadow-lg hover:shadow-xl"
+                className="w-full bg-white/80 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-gray-500 font-semibold flex items-center gap-3 hover:bg-white/30 transition-all duration-200 hover:transform hover:translateY-1 shadow-lg hover:shadow-xl"
               >
-                <div className="bg-white/20 p-2 rounded-lg">
+                <div className="bg-white p-2 rounded-lg">
                   <Plus size={20} />
                 </div>
-                <span>Add Class</span>
+                <span className='text-black'>Add Class</span>
               </button>
 
               {/* Add Departments Button */}
               <button
                 onClick={() => handleAction('Add Departments')}
-                className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-gray-500 font-semibold flex items-center gap-3 hover:bg-white/30 transition-all duration-200 hover:transform hover:translateY-1 shadow-lg hover:shadow-xl"
+                className="w-full bg-white/80 backdrop-blur-sm border border-white/30 rounded-xl p-4 text-gray-500 font-semibold flex items-center gap-3 hover:bg-white/30 transition-all duration-200 hover:transform hover:translateY-1 shadow-lg hover:shadow-xl"
               >
-                <div className="bg-white/20 p-2 rounded-lg">
+                <div className="bg-white p-2 rounded-lg">
                   <Users size={20} />
                 </div>
-                <span>Add Departments</span>
+                <span className='text-black'>Add Departments</span>
               </button>
             </div>
           </div>
@@ -267,7 +267,7 @@ export default function GradientActionCards({ setClasses, setDepartments }) {
           }}
         >
           {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-opacity-10 group-hover:bg-opacity-5 transition-all duration-300"></div>
+          <div className="absolute inset-0 bg-gray-800 bg-opacity-10 group-hover:bg-opacity-5 transition-all duration-300"></div>
 
           {/* Content */}
           <div className="relative z-10 p-8 h-full flex flex-col justify-between">

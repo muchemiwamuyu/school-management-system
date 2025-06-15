@@ -40,16 +40,12 @@ const mockApi = {
 
 // Predefined options for faster input
 const departmentOptions = [
-  'Administration', 'Academic Affairs', 'Student Services', 'Finance',
-  'Human Resources', 'IT Services', 'Library', 'Maintenance',
-  'Security', 'Cafeteria', 'Sports', 'Arts'
+  'Mathematics', 'science', 'Languages', 'Arts', 'Physical Education',
+  'Social Studies', 'Technology', 'Special Education', 'Counseling', 'Administration'
 ];
 
 const positionOptions = [
-  'Principal', 'Vice Principal', 'Department Head', 'Senior Teacher',
-  'Teacher', 'Assistant Teacher', 'Librarian', 'Lab Assistant',
-  'Administrative Assistant', 'Accountant', 'IT Specialist', 'Counselor',
-  'Security Guard', 'Maintenance Staff', 'Cafeteria Staff'
+  'Principal', 'Dean', 'Teacher', 'school-stakeholders',
 ];
 
 // Enhanced Dropdown Component
@@ -312,7 +308,7 @@ function StaffAdmin() {
       last_name: 'Last name is required',
       email: 'Email is required',
       phone_number: 'Phone number is required',
-      idnumber: 'ID number is required',
+      id_number: 'ID number is required',
       date_of_birth: 'Date of birth is required',
       date_of_joining: 'Date of joining is required',
       position: 'Position is required',
@@ -334,8 +330,8 @@ function StaffAdmin() {
 
     // Phone validation
     const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    if (formData.phoneNumber && !phoneRegex.test(formData.phoneNumber.replace(/\s/g, ''))) {
-      errors.phoneNumber = 'Please enter a valid phone number';
+    if (formData.phone_number && !phoneRegex.test(formData.phone_number.replace(/\s/g, ''))) {
+      errors.phone_number = 'Please enter a valid phone number';
     }
 
     setFormErrors(errors);
@@ -343,64 +339,27 @@ function StaffAdmin() {
   };
 
   const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
+  console.log('Submitting form...');
 
-    setUiState(prev => ({ ...prev, isLoading: true, responseMessage: '' }));
+  if (!validateForm()) {
+    console.log('Form validation failed');
+    return;
+  }
 
+  setUiState(prev => ({ ...prev, isLoading: true, responseMessage: '' }));
 
-    try {
-      const response = await AxiosInstance1.post('register_school/', formData);
+  try {
+    console.log('Sending request to backend...');
+    const response = await AxiosInstance1.post('register_school/', formData);
+    console.log('Response:', response);
 
-      if (response.status === 201) {
-        setUiState(prev => ({
-          ...prev,
-          responseMessage: response.data.message || 'Staff member registered successfully!',
-          isSuccess: true,
-          isLoading: false
-        }));
-      } else if (response.status === 400) {
-        setUiState(prev => ({
-          ...prev,
-          responseMessage: response.data.message || 'Validation error - please check your input',
-          isSuccess: false,
-          isLoading: false
-        }));
-      }
+    // rest of your logic...
+  } catch (error) {
+    console.error('Request failed:', error);
+    // rest of your error logic...
+  }
+};
 
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({
-          first_name: '',
-          last_name: '',
-          email: '',
-          phone_number: '',
-          id_number: '',
-          date_of_birth: '',
-          date_of_joining: '',
-          position: '',
-          department: ''
-        });
-        setUiState(prev => ({
-          ...prev,
-          responseMessage: '',
-          isSuccess: null,
-          currentStep: 1
-        }));
-        setFormErrors({});
-        setEmailAvailable(null);
-      }, 3000);
-
-    } catch (error) {
-      setUiState(prev => ({
-        ...prev,
-        responseMessage: error.message,
-        isSuccess: false,
-        isLoading: false
-      }));
-    }
-  };
 
   const getFormProgress = () => {
     const totalFields = Object.keys(formData).length;
@@ -485,10 +444,11 @@ function StaffAdmin() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <EnhancedInputField
                       label="First Name"
-                      name="firstName"
+                      name="first_name"
+                      type="text"
                       placeholder="Enter first name"
                       icon={User}
-                      value={formData.firstName}
+                      value={formData.first_name}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
@@ -496,10 +456,11 @@ function StaffAdmin() {
                     />
                     <EnhancedInputField
                       label="Last Name"
-                      name="lastName"
+                      name="last_name"
+                      type="text"
                       placeholder="Enter last name"
                       icon={User}
-                      value={formData.lastName}
+                      value={formData.last_name}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
@@ -528,31 +489,31 @@ function StaffAdmin() {
 
                     <EnhancedInputField
                       label="Phone Number"
-                      name="phoneNumber"
+                      name="phone_number"
                       type="tel"
                       placeholder="Enter phone number"
                       icon={Phone}
-                      value={formData.phoneNumber}
+                      value={formData.phone_number}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
                     />
                     <EnhancedInputField
                       label="ID Number"
-                      name="idNumber"
+                      name="id_number"
                       placeholder="Enter ID number"
                       icon={CreditCard}
-                      value={formData.idNumber}
+                      value={formData.id_number}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
                     />
                     <EnhancedInputField
                       label="Date of Birth"
-                      name="dateOfBirth"
+                      name="date_of_birth"
                       type="date"
                       icon={Calendar}
-                      value={formData.dateOfBirth}
+                      value={formData.date_of_birth}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
@@ -573,10 +534,10 @@ function StaffAdmin() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <EnhancedInputField
                       label="Date of Joining"
-                      name="dateOfJoining"
+                      name="date_of_joining"
                       type="date"
                       icon={Calendar}
-                      value={formData.dateOfJoining}
+                      value={formData.date_of_joining}
                       onChange={handleInputChange}
                       onFocus={handleFieldFocus}
                       formErrors={formErrors}
