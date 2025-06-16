@@ -28,6 +28,7 @@ import StaffAttendanceSystem from './pages/StaffAttendanceSystem'
 import Assignments from './pages/Assignments'
 import CameraTest from './pages/CameraTest'
 import StudentDetails from './pages/StudentDetails'
+import ApplicationForm from './pages/ApplicationForm'
 
 function App() {
  
@@ -56,6 +57,7 @@ function App() {
         <Route path='/dean-dashboard' element={<Deans/>}/>
         <Route path='/assignments' element={<Assignments/>}/>
         <Route path='/camera' element={<CameraTest/>}/>
+        <Route path='/form' element={<ApplicationForm/> }/>
         <Route path="/students/:id" element={<StudentDetails />} />
         {/* Add more routes as needed */}
       </Routes>
