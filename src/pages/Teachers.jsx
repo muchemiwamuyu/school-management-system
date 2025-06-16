@@ -66,7 +66,7 @@ export default function Teachers() {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await AxiosInstance2.get('classes/'); // 
+        const response = await AxiosInstance1.get('/class/classes/'); // 
         const allClasses = response.data;
 
         const loggedInUsername = localStorage.getItem('usersName');
@@ -123,7 +123,7 @@ export default function Teachers() {
 
     const fetchStudents = async () => {
       try {
-        const response = await AxiosInstance4.get('students/');
+        const response = await AxiosInstance1.get('/students/students/');
         setAvailableStudents(response.data);
         console.log('Student data fetched successfully:', response.data);
       } catch (error) {

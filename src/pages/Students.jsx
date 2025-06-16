@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { User, Mail, Phone, Calendar, GraduationCap, UserCheck, Lock } from 'lucide-react';
-import { AxiosInstance4 } from '../api/Axios';
+import { AxiosInstance1, AxiosInstance4 } from '../api/Axios';
 import { toast } from 'react-toastify';
 
 export default function Students() {
@@ -59,7 +59,7 @@ export default function Students() {
   try {
     setIsSubmitting(true); // ⏳ Start loading
 
-    const response = await AxiosInstance4.post("register_student/", formData);
+    const response = await AxiosInstance1.post("/students/register_student/", formData);
     console.log(response.data);
 
     if (response.status === 201) {

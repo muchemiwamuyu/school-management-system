@@ -29,7 +29,7 @@ const Schedules = () => {
 
     const fetchNames = async () => {
         try {
-            const responses = await AxiosInstance1.get('school_staff/');
+            const responses = await AxiosInstance1.get('/accounts/school_staff/');
             setStaffNames(responses.data);
             console.log('Staff names fetched successfully:', responses.data);
         } catch (error) {
@@ -41,7 +41,7 @@ const Schedules = () => {
 
     const fetchClasses = async () => {
         try {
-            const response = await AxiosInstance2.get('classes/');
+            const response = await AxiosInstance1.get('/class/classes/');
             setClasseData(response.data);
             console.log('Classes fetched successfully:', response.data);
         } catch (error) {
@@ -52,7 +52,7 @@ const Schedules = () => {
 
     const fetchRoaster = async () => {
         try {
-            const response = await AxiosInstance1.get('roasters/');
+            const response = await AxiosInstance1.get('/accounts/roasters/');
             setRoasterData(response.data);
             console.log('Roaster data fetched successfully:', response.data);
         } catch (error) {
@@ -63,7 +63,7 @@ const Schedules = () => {
 
     const fetchMeetings = async () => {
         try {
-            const response = await AxiosInstance1.get('meetings/');
+            const response = await AxiosInstance1.get('/accounts/meetings/');
             setMeetingData(response.data);
             console.log('Meeting data fetched successfully:', response.data);
         } catch (error) {
@@ -96,7 +96,7 @@ const Schedules = () => {
                 staff: parseInt(dutyRoster.staff),  // Ensure staff is a number
             };
 
-            const response = await AxiosInstance1.post('roaster/', payload);
+            const response = await AxiosInstance1.post('/accounts/roaster/', payload);
 
             // Optional: fetch full updated list from backend
             await fetchRoaster();
@@ -132,7 +132,7 @@ const Schedules = () => {
         e.preventDefault();
 
         try {
-            const reponse = await AxiosInstance1.post('meeting/', meeting);
+            const reponse = await AxiosInstance1.post('/accounts/meeting/', meeting);
             toast.success(reponse.data.message || 'Meeting added successfully!');
             setMeetingData(prev => [...prev, reponse.data]);
             setIsModalOpen(false);
