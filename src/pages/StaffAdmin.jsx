@@ -6,6 +6,7 @@ import {
   ChevronDown, Search, X, Save
 } from 'lucide-react';
 import { AxiosInstance1 } from '../api/Axios';
+import { toast } from 'react-toastify';
 
 // Enhanced School Brand Component
 const SchoolBrand = () => (
@@ -352,10 +353,28 @@ function StaffAdmin() {
     console.log('Sending request to backend...');
     const response = await AxiosInstance1.post('/accounts/register_school/', formData);
     console.log('Response:', response);
+    toast.success('Staff member registered successfully!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
     // rest of your logic...
   } catch (error) {
     console.error('Request failed:', error);
+    toast.error('Registration failed - please try again', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     // rest of your error logic...
   }
 };
