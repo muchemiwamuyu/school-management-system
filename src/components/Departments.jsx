@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Users, UserCheck, Settings, X } from 'lucide-react';
-import { AxiosInstance2 } from '../api/Axios';
+import { AxiosInstance1, AxiosInstance2 } from '../api/Axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -79,7 +79,7 @@ export default function GradientActionCards({ setClasses, setDepartments }) {
 
         let response;
         if (activeModal === 'Add Class') {
-          response = await AxiosInstance2.post('add_class/', formData);
+          response = await AxiosInstance1.post('/class/add_class/', formData);
 
           if (response.status === 201 || response.status === 200) {
           toast.success('Class added successfully!');
@@ -93,7 +93,7 @@ export default function GradientActionCards({ setClasses, setDepartments }) {
 
           // second if block for Add Departments
         } else if (activeModal === 'Add Departments') {
-          response = await AxiosInstance2.post('departments/', formData);
+          response = await AxiosInstance1.post('/class/departments/', formData);
 
           if (response.status === 201 || response.status === 200) {
             toast.success('Department added successfully!');

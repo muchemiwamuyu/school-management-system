@@ -49,7 +49,7 @@ export default function Deans() {
 
   const fetchStaff = async () => {
     try {
-      const response = await AxiosInstance1.get('school_staff/');
+      const response = await AxiosInstance1.get('/accounts/school_staff/');
       setStaffList(response.data);
       setFilteredStaff(response.data);
       console.log("Staff data fetched successfully:", response.data);
@@ -63,7 +63,7 @@ export default function Deans() {
 
   const fetchStudents = async () => {
     try {
-      const response = await AxiosInstance4.get('students/');
+      const response = await AxiosInstance1.get('/students/students/');
       setStudents(response.data);
     } catch (error) {
       console.error("Error fetching students data:", error);
