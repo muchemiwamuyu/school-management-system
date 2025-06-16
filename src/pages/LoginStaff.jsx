@@ -42,7 +42,7 @@ function LoginStaff() {
     // Your original API call code would be:
     
     try {
-      const loginStaff = await AxiosInstance1.post('loginstaff/', formData);
+      const loginStaff = await AxiosInstance1.post('/accounts/loginstaff/', formData);
       console.log("Login Response:", loginStaff.data);
       
       const token = loginStaff.data.token;
