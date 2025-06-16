@@ -350,7 +350,7 @@ function StaffAdmin() {
 
   try {
     console.log('Sending request to backend...');
-    const response = await AxiosInstance1.post('register_school/', formData);
+    const response = await AxiosInstance1.post('/accounts/register_school/', formData);
     console.log('Response:', response);
 
     // rest of your logic...
