@@ -52,6 +52,7 @@ export default function Deans() {
       const response = await AxiosInstance1.get('school_staff/');
       setStaffList(response.data);
       setFilteredStaff(response.data);
+      console.log("Staff data fetched successfully:", response.data);
     } catch (error) {
       console.error("Error fetching staff data:", error);
     } finally {

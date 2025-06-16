@@ -66,7 +66,7 @@ export default function Teachers() {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await AxiosInstance2.get('classes/'); // 🔁 Replace with your endpoint
+        const response = await AxiosInstance2.get('classes/'); // 
         const allClasses = response.data;
 
         const loggedInUsername = localStorage.getItem('usersName');
