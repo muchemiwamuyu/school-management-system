@@ -35,7 +35,7 @@ function MainStaff() {
     // Your original API call code would be:
     
     try {
-      const response = await AxiosInstance1.post('registerstaff/', {
+      const response = await AxiosInstance1.post('/accounts/registerstaff/', {
         username: formData.username,
         email: formData.email,
         password: formData.password
