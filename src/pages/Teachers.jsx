@@ -89,7 +89,7 @@ export default function Teachers() {
 
     const fetchMeetings = async () => {
             try {
-                const response = await AxiosInstance1.get('meetings/');
+                const response = await AxiosInstance1.get('/accounts/meetings/');
                 setMeetings(response.data);
                 console.log('Meeting data fetched successfully:', response.data);
             } catch (error) {
@@ -100,7 +100,7 @@ export default function Teachers() {
 
     const fetchStaffData = async () => {
       try {
-        const response = await AxiosInstance1.get('school_staff/'); // 
+        const response = await AxiosInstance1.get('/accounts/school_staff/'); // 
         const allStaff = response.data;
 
         const loggedInUsername = localStorage.getItem('usersName');
