@@ -68,7 +68,7 @@ export default function Home() {
     e.preventDefault()
     try {
       const response = await AxiosInstance1.post('/parents/request/', stakeholderForm)
-      setRegistered(response.data.message)
+      setRegistered(response.data.message ||  'Registration successful! We will contact you soon.')
     } catch (error) {
       setRegistered('Error occured', error.message)
     }
