@@ -68,7 +68,7 @@ export default function Home() {
     e.preventDefault()
     try {
       const response = await AxiosInstance1.post('/parents/request/', stakeholderForm)
-      setRegistered(response.data.message ||  'Registration successful! We will contact you soon.')
+      setRegistered('Registration successful! We will contact you soon.')
     } catch (error) {
       setRegistered('Error occured', error.message)
     }
@@ -95,9 +95,10 @@ export default function Home() {
             <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
                 <button
+                  style={{ fontFamily: 'Instrument Serif, serif' }}
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-4 py-2 text-sm font-medium transition-all duration-300 relative ${
+                  className={`px-4 py-2 text-lg font-bold transition-all duration-300 relative ${
                     activeSection === item.id
                       ? 'text-blue-600'
                       : 'text-gray-600 hover:text-blue-600'
@@ -146,7 +147,7 @@ export default function Home() {
                 </button>
               ))}
               <div className="px-3 pt-4">
-                <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-3 rounded-full text-base font-bold shadow-lg">
+                <button  onClick={() => navigate('/form')} className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-3 rounded-full text-base font-bold shadow-lg">
                   Apply Now
                 </button>
               </div>
@@ -166,14 +167,14 @@ export default function Home() {
                   <span className="text-sm font-medium text-blue-700">Award-Winning Education</span>
                 </div>
                 
-                <h1 className="text-5xl lg:text-7xl font-extrabold">
+                <h1 className="text-5xl lg:text-7xl font-extrabold" style={{ fontFamily: 'Adamina, serif' }}>
                   <span className="block text-gray-900">Where Young</span>
                   <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                     Minds Shine
                   </span>
                 </h1>
                 
-                <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                <p className="text-xl text-gray-600 leading-relaxed max-w-2xl" style={{ fontFamily: 'Instrument Serif, serif' }}>
                   Nurturing brilliance in children aged 5-11 through innovative curriculum, personalized attention, and a culture of excellence that prepares them for tomorrow's world.
                 </p>
               </div>
@@ -226,7 +227,7 @@ export default function Home() {
       <section id="about" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6" style={{ fontFamily: 'Instrument Serif, serif' }}>
               About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Our Academy</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -272,7 +273,7 @@ export default function Home() {
 
           {/* Why Choose Us */}
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-12">Why Choose Kingsbridge Academy?</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-12 underline" style={{ fontFamily: 'Instrument Serif, serif' }}>Why Choose Kingsbridge Academy?</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
                 <div key={index} className="group p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
@@ -292,7 +293,7 @@ export default function Home() {
       <section id="academics" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6" style={{ fontFamily: 'Instrument Serif, serif' }}>
               Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Academic Programs</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -350,10 +351,10 @@ export default function Home() {
       <section id="contact" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6" style={{ fontFamily: 'Instrument Serif, serif' }}>
               Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto" style={{ fontFamily: 'Adamina, serif' }}>
               Ready to give your child the gift of exceptional education? We'd love to meet you and show you what makes Kingsbridge Academy special.
             </p>
           </div>
@@ -378,7 +379,7 @@ export default function Home() {
               </div>
 
               <div className="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Ready to Join Our Family?</h3>
+                <h3 className="text-2xl font-bold mb-4 underline text-black" style={{ fontFamily: 'Instrument Serif, serif' }}>Ready to Join Our Family?</h3>
                 <p className="mb-6 text-white/90">
                   Book a personalized tour and see firsthand why families choose Kingsbridge Academy for their children's education.
                 </p>
@@ -455,8 +456,8 @@ export default function Home() {
                 </div>
 
                 {registered && (
-                  <div className="text-green-600 font-semibold">
-                    {registered}
+                  <div>
+                    <p  style={{ fontFamily: 'Instrument Serif, serif' }} className="text-green-600 font-semibold text-center">{registered}</p>
                   </div> 
                 )}
                 <button 
@@ -502,7 +503,7 @@ export default function Home() {
 
             <div>
               <h3 className="text-lg font-bold mb-6 text-blue-300">Quick Links</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3 text-lg" style={{ fontFamily: 'Instrument Serif, serif' }}>
                 {quickLinks.map((link, index) => (
                   <li key={index}>
                     <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
@@ -519,13 +520,13 @@ export default function Home() {
                 <div className="flex items-center">
                   <FiMapPin className="text-blue-400 mr-3" />
                   <div className="text-gray-300">
-                    <p>123 Education Lane</p>
-                    <p>Learning City, LC 12345</p>
+                    <p>Lavington, Nairobi</p>
+                    <p>owashika lane</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <FiPhone className="text-blue-400 mr-3" />
-                  <p className="text-gray-300">(555) 123-4567</p>
+                  <p className="text-gray-300">+254 700 748 603</p>
                 </div>
                 <div className="flex items-center">
                   <FiMail className="text-blue-400 mr-3" />
@@ -659,12 +660,12 @@ const contactInfo = [
   {
     icon: FiMapPin,
     label: "Address",
-    value: "123 Education Lane, Learning City, LC 12345"
+    value: "Lavington, Nairobi, Owashika Lane"
   },
   {
     icon: FiPhone,
     label: "Phone",
-    value: "(555) 123-4567"
+    value: "+254 700 748 603"
   },
   {
     icon: FiMail,
@@ -674,7 +675,7 @@ const contactInfo = [
   {
     icon: FiGlobe,
     label: "Website",
-    value: "www.kingsbridgeacademy.edu"
+    value: "www.kingsbridgeacademy.netlify.app"
   }
 ]
 
@@ -682,9 +683,7 @@ const quickLinks = [
   { name: "Admissions", href: "#" },
   { name: "Academic Calendar", href: "#" },
   { name: "Student Portal", href: "#" },
-  { name: "Parent Resources", href: "#" },
-  { name: "News & Events", href: "#" },
-  { name: "Career Opportunities", href: "#" }
+  {name: 'staff', href: '/login'}
 ]
 
 const socialLinks = [
