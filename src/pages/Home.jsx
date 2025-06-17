@@ -4,10 +4,19 @@ import Logo from '../assets/logo.svg'
 
 import { FiMenu, FiX, FiArrowRight, FiCheck, FiBook, FiAward, FiUsers, FiSmile, FiMail, FiPhone, FiMapPin, FiStar, FiGlobe, FiHeart, FiTarget, FiShield } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
+import { AxiosInstance1 } from '../api/Axios'
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [stakeholderForm, setStakeholderForm] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    message: '',
+  })
+  const [registered, setRegistered] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +55,24 @@ export default function Home() {
     { id: 'contact', label: 'Contact' }
   ]
   const navigate = useNavigate()
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target
+    setStakeholderForm({
+      ...stakeholderForm,
+      [name]: value
+    })
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await AxiosInstance1.post('/parents/request/', stakeholderForm)
+      setRegistered(response.data.message)
+    } catch (error) {
+      setRegistered('Error occured', error.message)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -363,12 +390,17 @@ export default function Home() {
 
             <div className="bg-white rounded-3xl shadow-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-8">Send us a Message</h3>
-              <form className="space-y-6">
+              {/* stakeholders form */}
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
                     <input 
+                      onChange={handleFormChange}
+                      value={stakeholderForm.first_name}
+                      name="first_name"
                       type="text" 
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Your first name"
                     />
@@ -377,6 +409,10 @@ export default function Home() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
                     <input 
                       type="text" 
+                      onChange={handleFormChange}
+                      value={stakeholderForm.last_name}
+                      name="last_name"
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Your last name"
                     />
@@ -385,6 +421,10 @@ export default function Home() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input 
+                    onChange={handleFormChange}
+                    value={stakeholderForm.email}
+                    name="email"
+                    required
                     type="email" 
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="your.email@example.com"
@@ -393,6 +433,10 @@ export default function Home() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
                   <input 
+                    onChange={handleFormChange}
+                    value={stakeholderForm.phone_number}
+                    name="phone_number"
+                    required
                     type="tel" 
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="Your phone number"
@@ -401,11 +445,20 @@ export default function Home() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                   <textarea 
+                    onChange={handleFormChange}
+                    value={stakeholderForm.message}
+                    name="message"
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                     placeholder="Tell us about your child and any questions you have..."
                   />
                 </div>
+
+                {registered && (
+                  <div className="text-green-600 font-semibold">
+                    {registered}
+                  </div> 
+                )}
                 <button 
                   type="submit"
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl font-bold text-lg shadow-xl transform hover:scale-105 transition-all duration-300"
