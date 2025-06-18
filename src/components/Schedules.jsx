@@ -21,6 +21,7 @@ const Schedules = () => {
         title: '',
         agenda: '',
         description: '',
+        event_date: '',
         status: '',
     });
     const [meetingData, setMeetingData] = useState([]);
@@ -140,6 +141,7 @@ const Schedules = () => {
                 title: '',
                 agenda: '',
                 description: '',
+                event_date: '',
                 status: ''
             });
         } catch (error) {
@@ -456,8 +458,8 @@ const Schedules = () => {
                                         </button>
                                         <h3 className="text-xl font-bold mb-4 text-gray-800">Add New Meeting</h3>
 
-                                        <form onSubmit={handleMeetingSubmit} className="space-y-4">
-                                            <div>
+                                        <form onSubmit={handleMeetingSubmit} className="space-y-5">
+                                            <div className='space-y-1'>
                                                 <label className="block text-sm font-medium text-gray-700">Title</label>
                                                 <input
                                                     type="text"
@@ -469,7 +471,7 @@ const Schedules = () => {
                                                 />
                                             </div>
 
-                                            <div>
+                                            <div className='space-y-1'>
                                                 <label className="block text-sm font-medium text-gray-700">Agenda</label>
                                                 <textarea
                                                     value={meeting.agenda}
@@ -480,7 +482,7 @@ const Schedules = () => {
                                                 />
                                             </div>
 
-                                            <div>
+                                            <div className='space-y-1'>
                                                 <label className="block text-sm font-medium text-gray-700">Description</label>
                                                 <textarea
                                                     value={meeting.description}
@@ -490,7 +492,19 @@ const Schedules = () => {
                                                 />
                                             </div>
 
-                                            <div>
+                                            <div className='space-y-1'>
+                                                <label className="block text-sm font-medium text-gray-700">Date</label>
+                                                <input
+                                                    type="date"
+                                                    value={meeting.event_date}
+                                                    onChange={(e) => setMeeting({ ...meeting, event_date: e.target.value })}
+                                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    placeholder="e.g. Term One Staff Meeting"
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className='space-y-1'>
                                                 <label className="block text-sm font-medium text-gray-700">Status</label>
                                                 <select
                                                     value={meeting.status}
@@ -536,6 +550,12 @@ const Schedules = () => {
                                                 <div className="flex items-start gap-2">
                                                     <span className="font-semibold">Description:</span>
                                                     <span>{meet.description}</span>
+                                                </div>
+                                            )}
+                                            {meet.event_date && (
+                                                <div className='flex items-start gap-2'>
+                                                    <span className="font-semibold">Date:</span>
+                                                    <span>{meet.event_date}</span>
                                                 </div>
                                             )}
                                             <div className="text-xs text-gray-400 mt-2">

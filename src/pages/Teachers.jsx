@@ -23,6 +23,7 @@ import {
 import { User, Mail, Phone, Briefcase } from 'lucide-react';
 
 import { AxiosInstance1, AxiosInstance2, AxiosInstance4 } from '../api/Axios';
+import StaffSchedule from '../components/StaffSchedule';
 
 export default function Teachers() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -59,7 +60,7 @@ export default function Teachers() {
   const [userStaff, setUserStaff] = useState([]);
   const [availableStudents, setAvailableStudents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
+
 
 
 
@@ -88,15 +89,15 @@ export default function Teachers() {
     };
 
     const fetchMeetings = async () => {
-            try {
-                const response = await AxiosInstance1.get('/accounts/meetings/');
-                setMeetings(response.data);
-                console.log('Meeting data fetched successfully:', response.data);
-            } catch (error) {
-                console.error('Error fetching meeting data:', error);
-                // toast.error('Failed to fetch meeting data');
-            }
-        }
+      try {
+        const response = await AxiosInstance1.get('/accounts/meetings/');
+        setMeetings(response.data);
+        console.log('Meeting data fetched successfully:', response.data);
+      } catch (error) {
+        console.error('Error fetching meeting data:', error);
+        // toast.error('Failed to fetch meeting data');
+      }
+    }
 
     const fetchStaffData = async () => {
       try {
@@ -207,9 +208,9 @@ export default function Teachers() {
             {[
               { id: 'overview', icon: BarChart3, label: 'Overview' },
               { id: 'classes', icon: Users, label: 'classes' },
-              { id: 'clockIn', icon: LogIn, label: 'Clock in' },
+              // { id: 'clockIn', icon: LogIn, label: 'Clock in' },
               { id: 'schedule', icon: Calendar, label: 'Schedule' },
-              { id: 'assignments', icon: FileText, label: 'Assignments' },
+              // { id: 'assignments', icon: FileText, label: 'Assignments' },
               { id: 'messages', icon: MessageSquare, label: 'Messages' },
               { id: 'resources', icon: Video, label: 'Resources' },
 
@@ -292,139 +293,35 @@ export default function Teachers() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Today's Schedule */}
                 <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-  <div className="flex items-center justify-between mb-6">
-    <h3 className="text-xl font-bold text-gray-800">Scheduled Meetings</h3>
-    <Clock className="w-5 h-5 text-gray-600" />
-  </div>
-  <div className="space-y-4">
-    {meetings.map((meeting, index) => (
-      <div
-        key={index}
-        className="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl hover:shadow-md transition-all duration-200"
-      >
-        <div className="w-2 h-16 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-        <div className="flex-1">
-          <div className="flex items-center justify-between">
-            <h4 className="font-semibold text-gray-800">{meeting.title}</h4>
-            <span className={`text-sm font-medium capitalize ${
-              meeting.status === 'completed' ? 'text-green-600' :
-              meeting.status === 'ongoing' ? 'text-orange-500' :
-              'text-blue-600'
-            }`}>
-              {meeting.status}
-            </span>
-          </div>
-          <p className="text-gray-600 text-sm">{meeting.agenda} • {new Date(meeting.created_at).toLocaleDateString()}</p>
-          <p className="text-gray-500 text-xs mt-1">{meeting.description}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
-
-                {/* Recent Activity */}
-                <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-800">Recent Activity</h3>
-                    <Bell className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {recentActivity.map((activity, index) => (
-                      <div key={index} className="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl hover:shadow-md transition-all duration-200 border border-white/30">
-                        <div className="flex items-start space-x-4">
-                          <div className={`w-3 h-3 rounded-full mt-1 flex-shrink-0 ${activity.type === 'assignment' ? 'bg-blue-500' :
-                            activity.type === 'message' ? 'bg-green-500' : 'bg-orange-500'
-                            }`}></div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-gray-800 text-sm font-medium leading-relaxed">{activity.text}</p>
-                            <p className="text-gray-500 text-xs mt-2">{activity.time}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Class Performance */}
-              <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-gray-800">Class Performance</h3>
-                  <Award className="w-5 h-5 text-gray-600" />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {classStats.map((stat, index) => (
-                    <div key={index} className="p-4 bg-gradient-to-br from-white/80 to-gray-50/80 rounded-xl border border-white/30">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-semibold text-gray-800">{stat.subject}</h4>
-                        <div className={`flex items-center space-x-1 ${stat.trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
-                          <TrendingUp className={`w-4 h-4 ${stat.trend === 'down' ? 'rotate-180' : ''}`} />
-                        </div>
-                      </div>
-                      <p className="text-gray-600 text-sm mb-2">{stat.students} students</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-gray-800">{stat.avgGrade}%</span>
-                        <div className="flex space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${i < Math.floor(stat.avgGrade / 20) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'clockIn' && (
-            <div className="space-y-6">
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {[
-                  { title: 'Total Students', value: '156', icon: Users, color: 'from-blue-500 to-cyan-500', change: '+12%' },
-                  { title: 'Classes Today', value: '6', icon: Calendar, color: 'from-green-500 to-teal-500', change: '+2' },
-                  { title: 'Assignments Due', value: '23', icon: FileText, color: 'from-orange-500 to-red-500', change: '-5' },
-                  { title: 'Avg Performance', value: '85%', icon: TrendingUp, color: 'from-purple-500 to-pink-500', change: '+3%' },
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-600 text-sm font-medium">{stat.title}</p>
-                        <p className="text-3xl font-bold text-gray-800 mt-1">{stat.value}</p>
-                        <p className="text-sm text-green-600 font-medium mt-1">{stat.change}</p>
-                      </div>
-                      <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center`}>
-                        <stat.icon className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Today's Schedule */}
-                <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-gray-800">Today's Schedule</h3>
+                    <h3 className="text-xl font-bold text-gray-800">Scheduled Meetings</h3>
                     <Clock className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="space-y-4">
-                    {upcomingClasses.map((class_, index) => (
-                      <div key={index} className="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl hover:shadow-md transition-all duration-200">
+                    {meetings.map((meeting, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl hover:shadow-md transition-all duration-200"
+                      >
                         <div className="w-2 h-16 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
-                            <h4 className="font-semibold text-gray-800">{class_.subject}</h4>
-                            <span className="text-sm font-medium text-blue-600">{class_.time}</span>
+                            <h4 className="font-semibold text-gray-800">{meeting.title}</h4>
+                            <span className={`text-sm font-medium capitalize ${meeting.status === 'completed' ? 'text-green-600' :
+                                meeting.status === 'ongoing' ? 'text-orange-500' :
+                                  'text-blue-600'
+                              }`}>
+                              {meeting.status}
+                            </span>
                           </div>
-                          <p className="text-gray-600 text-sm">{class_.class} • {class_.room}</p>
+                          <p className="text-gray-600 text-sm">{meeting.agenda} • {new Date(meeting.created_at).toLocaleDateString()}</p>
+                          <p className="text-gray-500 text-xs mt-1">{meeting.description}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
+
 
                 {/* Recent Activity */}
                 <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-lg">
@@ -480,6 +377,8 @@ export default function Teachers() {
               </div>
             </div>
           )}
+
+
 
           {activeTab === 'classes' && (
             <div className="space-y-6">
@@ -514,7 +413,7 @@ export default function Teachers() {
                           <p className="text-2xl font-bold text-gray-800">{userClass.class_name}</p>
                         </>
                       )}
-                      
+
                     </div>
                   </div>
                 </div>
@@ -556,14 +455,14 @@ export default function Teachers() {
               <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <button className="flex flex-col items-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group" onClick={() => navigate('/attendance')}>
+                  {/* <button className="flex flex-col items-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group" onClick={() => navigate('/attendance')}>
                     <div className="bg-blue-500 group-hover:bg-blue-600 rounded-full p-3 mb-3 transition-colors">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                       </svg>
                     </div>
                     <span className="text-sm font-medium text-gray-700">Mark Attendance</span>
-                  </button>
+                  </button> */}
 
                   <button className="flex flex-col items-center p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors group" onClick={() => navigate('/students')}>
                     <div className="bg-green-500 group-hover:bg-green-600 rounded-full p-3 mb-3 transition-colors">
@@ -598,107 +497,107 @@ export default function Teachers() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Class List */}
                 <div className="lg:col-span-2 bg-white rounded-xl shadow-lg border border-gray-200">
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">Available School Students</h3>
-          <button
-            onClick={() => setIsModalOpen(true)} // ← set your actual route here
-            className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-          >
-            View All
-          </button>
-        </div>
-      </div>
+                  <div className="p-6 border-b border-gray-200">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-gray-800">Available School Students</h3>
+                      <button
+                        onClick={() => setIsModalOpen(true)} // ← set your actual route here
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      >
+                        View All
+                      </button>
+                    </div>
+                  </div>
                   <div className="p-6">
-  <div className="space-y-4">
-    {availableStudents.slice(0, 5).map((student, index) => (
-      <div
-        key={index}
-        className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-      >
-        <div className="flex items-center">
-          <div className="bg-blue-500 rounded-lg p-2 mr-3">
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-          <div>
-            <p className="font-medium text-gray-800">
-              {student.first_name} {student.last_name} — {student.class_name}
-            </p>
-            <p className="text-sm text-gray-500">
-              Parent: {student.parents_email} • Joined: {student.date_of_joining}
-            </p>
-          </div>
-        </div>
-        <div className="text-right">
-          <p className="text-sm font-medium text-gray-600">DOB: {student.date_of_birth}</p>
-          <p className="text-xs text-gray-500">Contact: {student.parents_number}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
+                    <div className="space-y-4">
+                      {availableStudents.slice(0, 5).map((student, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            <div className="bg-blue-500 rounded-lg p-2 mr-3">
+                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="font-medium text-gray-800">
+                                {student.first_name} {student.last_name} — {student.class_name}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                Parent: {student.parents_email} • Joined: {student.date_of_joining}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm font-medium text-gray-600">DOB: {student.date_of_birth}</p>
+                            <p className="text-xs text-gray-500">Contact: {student.parents_number}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
                 </div>
 
                 {isModalOpen && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-all duration-300">
-    <div className="bg-white w-full max-w-4xl mx-4 md:mx-0 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 animate-fade-in">
-      <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50">
-        <h2 className="text-xl font-semibold text-gray-800">
-          All Registered Students
-        </h2>
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="text-gray-500 hover:text-red-500 text-2xl font-bold"
-        >
-          &times;
-        </button>
-      </div>
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-all duration-300">
+                    <div className="bg-white w-full max-w-4xl mx-4 md:mx-0 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 animate-fade-in">
+                      <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50">
+                        <h2 className="text-xl font-semibold text-gray-800">
+                          All Registered Students
+                        </h2>
+                        <button
+                          onClick={() => setIsModalOpen(false)}
+                          className="text-gray-500 hover:text-red-500 text-2xl font-bold"
+                        >
+                          &times;
+                        </button>
+                      </div>
 
-      <div className="px-6 py-4 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
-        {availableStudents.length === 0 ? (
-          <p className="text-gray-500 text-center py-10">No students found.</p>
-        ) : (
-          <div className="divide-y divide-gray-200 space-y-3">
-            {availableStudents.map((student, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center pt-2"
-              >
-                <div>
-                  <p className="font-semibold text-gray-800">
-                    {student.first_name} {student.last_name}
-                  </p>
-                  <p className="text-sm text-gray-500">{student.class_name}</p>
-                </div>
-                <div className="text-right text-sm text-gray-600">
-                  <p>Joined: {student.date_of_joining}</p>
-                  <p>DOB: {student.date_of_birth}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+                      <div className="px-6 py-4 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
+                        {availableStudents.length === 0 ? (
+                          <p className="text-gray-500 text-center py-10">No students found.</p>
+                        ) : (
+                          <div className="divide-y divide-gray-200 space-y-3">
+                            {availableStudents.map((student, index) => (
+                              <div
+                                key={index}
+                                className="flex justify-between items-center pt-2"
+                              >
+                                <div>
+                                  <p className="font-semibold text-gray-800">
+                                    {student.first_name} {student.last_name}
+                                  </p>
+                                  <p className="text-sm text-gray-500">{student.class_name}</p>
+                                </div>
+                                <div className="text-right text-sm text-gray-600">
+                                  <p>Joined: {student.date_of_joining}</p>
+                                  <p>DOB: {student.date_of_birth}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
 
-      <div className="px-6 py-3 border-t flex justify-end bg-gray-50">
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+                      <div className="px-6 py-3 border-t flex justify-end bg-gray-50">
+                        <button
+                          onClick={() => setIsModalOpen(false)}
+                          className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
 
                 {/* Sidebar Content */}
@@ -764,7 +663,15 @@ export default function Teachers() {
             </div>
           )}
 
-          {activeTab !== 'overview' && activeTab !== 'clockIn' && activeTab !== 'classes' && (
+          {activeTab === 'schedule' && (
+            <div className="">
+              {/* Welcome Header */}
+              <StaffSchedule/>
+              
+            </div>
+          )}
+
+          {activeTab !== 'overview' && activeTab !== 'classes' && activeTab !== 'schedule' && (
             <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-lg text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8 text-white" />
